@@ -6,7 +6,7 @@
 */
 -->
 <div>
-    <div class="top_bar">
+    <div class="top_bar" ng-init="favorite=true">
         <img src="app/static/image/return.png" ng-click="back()" width="16px" height="16px" />
         <span>{{clinicInfo.name}}</span>
         <img ng-show="(!favorite)&&hasLogin" src="app/static/image/noFavorite.png" ng-click="addFavorite()" width="20.5px" height="17.5px" class="top_bar_favorite">
@@ -35,9 +35,9 @@
 
     <div id="clinicPage" ng-show="currentPage=='clinic'">
         <section class="clinicImgs">
-            <img ng-src="{{clinicInfo.photo[0]}}" width="94px" height="70px" />
-            <img ng-src="{{clinicInfo.photo[1]}}" width="94px" height="70px" />
-            <img ng-src="{{clinicInfo.photo[2]}}" width="94px" height="70px" />
+            <img ng-src="app/static/image/hospital.jpg" width="94px" height="70px" />
+            <img ng-src="app/static/image/hospital.jpg" width="94px" height="70px" />
+            <img ng-src="app/static/image/hospital.jpg" width="94px" height="70px" />
         </section>
 
         <section class="clinicIntroduction">
@@ -65,7 +65,8 @@
             </p>
         </section>
 
-        <section class="clinicDetail" id="clinicDetailMapDiv" ng-click="showMap=!showMap; setMap();">
+        <!-- <section class="clinicDetail" id="clinicDetailMapDiv" ng-click="showMap=!showMap; setMap();"> -->
+        <section class="clinicDetail" id="clinicDetailMapDiv">
             <p>
                 诊所地址
             </p>
@@ -127,9 +128,9 @@
 
     <div id="roomPage" ng-show="currentPage=='room'">
         <section class="clinicImgs">
-            <img ng-src="{{dep.photo[0]}}" width="94px" height="70px" />
-            <img ng-src="{{dep.photo[1]}}" width="94px" height="70px" />
-            <img ng-src="{{dep.photo[2]}}" width="94px" height="70px" />
+            <img ng-src="app/static/image/dep.jpg" width="94px" height="70px" />
+            <img ng-src="app/static/image/dep.jpg" width="94px" height="70px" />
+            <img ng-src="app/static/image/dep.jpg" width="94px" height="70px" />
         </section>
 
         <section class="clinicIntroduction">

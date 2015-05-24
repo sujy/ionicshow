@@ -28,10 +28,10 @@ section#clinicListMsgChoose {
 	box-sizing: border-box;
 }
 
-.list .item {
+/*.list .item {
 	background: #d6d6d6;
 	border: 1px solid #e1e1e1;
-}
+}*/
 
 .item h2{
 	color: #565656;

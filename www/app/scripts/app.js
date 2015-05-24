@@ -322,7 +322,7 @@ angular.module('starter', ['ionic', 'controllers', 'userServices', 'ngCookies'])
       controller: 'userControllers.userPaperCtrl',
     })
     .state('userFavorite', {
-      url:'/userFavorite',
+      url:'/userFavorite/:target',
       templateUrl: viewsRoot + 'userFavorite.html',
       controller: 'userControllers.userFavoriteCtrl',
     })
@@ -331,10 +331,10 @@ angular.module('starter', ['ionic', 'controllers', 'userServices', 'ngCookies'])
       templateUrl: viewsRoot + 'doctorList.html',
       controller: 'searchDoctorControllers.docorListCtrl',
     })
-    .state('contactUs', {
-      url:'/contactUs',
-      templateUrl: viewsRoot + 'contactUs.html',
-      controller: 'contactUsControllers.contactUsCtrl',
+    .state('healthEva', {
+      url:'/healthEva',
+      templateUrl: viewsRoot + 'healthEva.html',
+      controller: 'healthEvaControllers.healthEvaCtrl',
     })
 
   $urlRouterProvider.otherwise('/');

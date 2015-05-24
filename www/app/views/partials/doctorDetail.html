@@ -6,7 +6,7 @@
 */
 -->
 <div id="doctorInfoBody">
-    <div class="top_bar">
+    <div class="top_bar" ng-init="favorite=true">
         <img src="app/static/image/return.png" ng-click="back()" width="16px" height="16px" />
         <span>{{doctorInfo.name}}</span>
         <img ng-show="!favorite&&hasLogin" src="app/static/image/noFavorite.png" ng-click="addFavorite()" width="20.5px" height="17.5px" class="top_bar_favorite">
@@ -14,7 +14,7 @@
     </div>
 
     <section id="doctorInfoLogo">
-        <img ng-src = "{{doctorInfo.photo}}" height="90px" width="69.5px">
+        <img ng-src = "app/static/image/morenlogo.png" height="90px" width="69.5px">
         <div>
             {{doctorInfo.name}}
             <div class="ui large rating UIdoctorRating disableRating  disableRatingactive">
@@ -28,10 +28,10 @@
         <p>{{doctorInfo.note}}</p>
     </section>
 
-    <section id="doctorInfoTable">
+    <!-- <section id="doctorInfoTable">
         <p>医生坐诊表</p>
-        <!-- <img ng-src="{{doctorInfo.}}"> -->
-    </section>
+        <img ng-src="{{doctorInfo.}}">
+    </section> -->
 
     <section id="doctorContactSection">
         <p>医生互动</p>
