@@ -12,7 +12,6 @@ doctorControllers.controller('doctorControllers.doctorDetailCtrl', ['$scope', '$
         $scope.clinicId = $state.params.clinicId;
 
         $scope.comment  = "";
-        $scope.favorite = false;
         if(localStorage.login_id != ''){
             $scope.hasLogin = true;
         } else {
@@ -28,11 +27,8 @@ doctorControllers.controller('doctorControllers.doctorDetailCtrl', ['$scope', '$
         }
 
         $scope.back = function(){
-            // $window.history.back();
             if($state.previous.name == 'userFavorite') {
-                $state.go('userFavorite');
-            } else if($state.previous.name == 'doctorList') {
-                $state.go('doctorList');
+                $state.go('userFavorite', {target : 'doctor'});
             } else {
                 $state.go('clinicInfo', {clinicId : $state.params.clinicId});
             }
@@ -62,12 +58,12 @@ doctorControllers.controller('doctorControllers.doctorDetailCtrl', ['$scope', '$
             }
         });
         //-------------------------------------是否被收藏---------------------------------------------------
-        var favoriteLen = $rootScope.favoriteDoctors.length;
+        /*var favoriteLen = $rootScope.favoriteDoctors.length;
         for (var i = 0; i < favoriteLen; i++) {
             if($state.params.doctorId == $rootScope.favoriteDoctors[i].uuid) {
                 $scope.favorite = true;
             }
-        }
+        }*/
 
         //-----------------------------------在线问诊----------------------------------------------------------
         $scope.onlineChating = function() {

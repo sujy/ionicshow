@@ -267,21 +267,15 @@ clinicControllers
      */
     .controller('clinicControllers.clinicInfoCtrl', ['$scope', '$state', '$rootScope',
         function($scope, $state, $rootScope)  {
-            console.log($rootScope)
-            console.log($state);
+            
             $scope.back = function(){
-                if($state.previous.name == 'userFavorite') {
-                    $state.go('userFavorite');
-                } else { 
-                    $state.go('clinicList');   
-                }
+                $state.go('userFavorite', {target : 'hospital'});
             };
 
 
             //-------------------------------------变量初始化-----------------------------------------------------------
             $scope.showMap = false;
             $scope.showComplaint = false;
-            $scope.favorite = false;
             if(localStorage.login_id != ''){
                 $scope.hasLogin = true;
             } else {
@@ -318,7 +312,7 @@ clinicControllers
                         });
                         //是否被收藏
 
-                        var favoriteLen = $rootScope.favoriteClinics.length;
+                        /*var favoriteLen = $rootScope.favoriteClinics.length;
                         for (var i = 0; i < favoriteLen; i++) {
                             console.log($state.params.clinicId + " - " + $rootScope.favoriteClinics[i].clinicID);
                             if($state.params.clinicId == $rootScope.favoriteClinics[i].clinicID) {
@@ -326,7 +320,7 @@ clinicControllers
                                     $scope.favorite = true;
                                 });
                             }
-                        }
+                        }*/
                     }
                 }
             });

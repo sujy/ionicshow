@@ -566,53 +566,55 @@ userControllers
         $scope.back = function(){
             $state.go('homepage');
         }
-        $scope.title = '我的收藏';
+
+        if ($state.params.target == 'doctor') {
+            $scope.title = '我的医生';
+            $scope.isClinic = false;
+
+            //收藏的医生
+            $.ajax(baseUrl+ "/patient" +"/searchDoctors",{
+                type:"POST",
+                data:{'flag' : '2'},
+                xhrFields: {withCredentials: true},
+                crossDomain:true,
+                error:function(){ console.log("服务器不能访问");},
+                success:function(msg){
+                    if (msg.status == "failure") {
+                        console.log("查找失败");
+                    } else if(msg) {
+                        $scope.$apply(function() {
+                            $scope.doctors = msg.doctors.reverse();
+                        });
+                    }
+                }
+            });
+        } else if ($state.params.target == 'hospital') {
+            $scope.title = '我的医院';
+            $scope.isClinic = true;
+
+            //收藏的诊所
+            $.ajax(baseUrl+ "/patient" +"/searchClinics",{
+                type:"POST",
+                data:{'flag' : '2'},
+                xhrFields: {withCredentials: true},
+                crossDomain:true,
+                error:function(){ console.log("服务器不能访问");},
+                success:function(msg){
+                    if (msg.status == "failure") {
+                        alert("查找失败");
+                    } else if(msg) {
+                        $scope.$apply(function() {
+                            $scope.clinics = msg.clinics.reverse();
+                        });
+                    }
+                }
+            });
+        }
+
         
-        if ($state.previous.name == "clinicInfo") {
-            $scope.isClinic = true;
-        } else if ($state.previous.name == "userMenu") {
-            $scope.isClinic = true;
-        } else {
-            $scope.isClinic = false;
-        }
-        //收藏的诊所
-        $.ajax(baseUrl+ "/patient" +"/searchClinics",{
-            type:"POST",
-            data:{'flag' : '2'},
-            xhrFields: {withCredentials: true},
-            crossDomain:true,
-            error:function(){ console.log("服务器不能访问");},
-            success:function(msg){
-                if (msg.status == "failure") {
-                    alert("查找失败");
-                } else if(msg) {
-                    $scope.$apply(function() {
-                        $scope.clinics = msg.clinics.reverse();
-                    });
-                }
-            }
-        });
-        //收藏的医生
-        $.ajax(baseUrl+ "/patient" +"/searchDoctors",{
-            type:"POST",
-            data:{'flag' : '2'},
-            xhrFields: {withCredentials: true},
-            crossDomain:true,
-            error:function(){ console.log("服务器不能访问");},
-            success:function(msg){
-                if (msg.status == "failure") {
-                    console.log("查找失败");
-                } else if(msg) {
-                    $scope.$apply(function() {
-                        $scope.doctors = msg.doctors.reverse();
-                    });
-                }
-            }
-        });
-        $scope.showDoctors = function(){
-            $scope.isClinic = false;
-        }
-        $scope.showClinics = function(){
-            $scope.isClinic = true;
-        }
+        $scope.ratingInit = function(rate, index) {
+            $('.ui.rating').eq(index).rating('set rating', rate);
+            $('.ui.rating').eq(index).rating('disable');
+        };
+
     }]);

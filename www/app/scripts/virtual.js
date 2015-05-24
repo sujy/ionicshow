@@ -16,7 +16,7 @@ angular.module('controllers',
         'healthInfoControllers',
         'healthManageControllers',
         'searchDoctorControllers',
-        'contactUsControllers'
+        'healthEvaControllers'
     ]
 );
 

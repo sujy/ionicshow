@@ -36,7 +36,7 @@
     </ul>
 
     <ul class="row homepage_row">
-        <li class="col homepage_col">
+        <li class="col homepage_col" ui-sref="healthEva">
             <div id="homepage_col_4"></div>
             健康评估
         </li>
@@ -52,11 +52,11 @@
 
     <!-- footer tabs -->
     <div class="tabs tabs-icon-top">
-        <a class="tab-item" ui-sref="userFavorite">
+        <a class="tab-item" ui-sref="userFavorite({target: 'doctor'})">
             <i class="icon ion-ios7-people-outline"></i>
             我的医生
         </a>
-        <a class="tab-item" ui-sref="userFavorite">
+        <a class="tab-item" ui-sref="userFavorite({target: 'hospital'})">
             <i class="icon ion-ios7-location-outline"></i>
             我的医院
         </a>
