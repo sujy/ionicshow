@@ -40,8 +40,8 @@ logControllers
                 rules: {
                     username: {
                         required: true,
-                        rangelength: [11,11],
-                        digits: true
+                        //rangelength: [11,11],
+                        //digits: true
                     },
                     password: {
                         required: true,
@@ -52,9 +52,10 @@ logControllers
                 },
                 messages: {
                     username: {
-                        required:    "请输入手机号码",
-                        rangelength: "请输入正确的手机号",
-                        digits:      "请输入正确的手机号"
+                        required:    "请输入账号",
+                        // required:    "请输入手机号码",
+                        // rangelength: "请输入正确的手机号",
+                        // digits:      "请输入正确的手机号"
                     },
                     password: {
                         required:    "请输入密码",
