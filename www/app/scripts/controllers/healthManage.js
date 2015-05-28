@@ -48,13 +48,7 @@ healthManageControllers
                 }
             },
             error: function () {
-                if(isAndroid){
-                    window.plugins.toast.showShortCenter(
-                        "服务器开小差了",function(a){},function(b){}
-                    );
-                } else {
-                    alert("error");
-                }
+                alert("error");
             }
         });
 
@@ -86,13 +80,7 @@ healthManageControllers
                 }
             },
             error: function () {
-                if(isAndroid){
-                    window.plugins.toast.showShortCenter(
-                        "服务器开小差了",function(a){},function(b){}
-                    );
-                } else {
-                    alert("error");
-                }
+                alert("error");
             }
         });
 
@@ -283,7 +271,7 @@ healthManageControllers
             
                     // 为echarts对象加载数据 
                     myChart.setOption(options.option); 
-
+console.log($scope.members[$scope.currentPerson].bloodPressure)
                     //设置时间
                     $scope.beginTime = rootTime(options.beginTime);
                     $scope.endTime   = rootTime(options.endTime);

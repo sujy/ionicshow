@@ -1,5 +1,5 @@
-var baseUrl = "http://128.199.91.212:9000";
-var pollingUrl = 'http://128.199.91.212:9000/chat';
+var baseUrl = "http://120.25.231.102:9000";
+var pollingUrl = 'http://120.25.231.102:9000/chat';
 
 // Ionic Starter App
 
@@ -321,16 +321,25 @@ angular.module('starter', ['ionic', 'controllers', 'userServices', 'ngCookies'])
       templateUrl: viewsRoot + 'userPaper.html',
       controller: 'userControllers.userPaperCtrl',
     })
+
+    .state('userPaperDetail', {
+      url:'/userPaperDetail/:index',
+      templateUrl: viewsRoot + 'userPaperDetail.html',
+      controller: 'userControllers.userPaperDetailCtrl',
+    })
+
     .state('userFavorite', {
       url:'/userFavorite/:target',
       templateUrl: viewsRoot + 'userFavorite.html',
       controller: 'userControllers.userFavoriteCtrl',
     })
+
     .state('doctorList', {
       url:'/doctorList',
       templateUrl: viewsRoot + 'doctorList.html',
       controller: 'searchDoctorControllers.docorListCtrl',
     })
+    
     .state('healthEva', {
       url:'/healthEva',
       templateUrl: viewsRoot + 'healthEva.html',

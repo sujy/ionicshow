@@ -15,7 +15,7 @@ userControllers
             
             //---------------定义返回函数---------------------------------
             $scope.back = function(){
-                window.clearInterval(chatCheckPolling);
+                //window.clearInterval(chatCheckPolling);
                 $('.ui.modal')
                     .modal('hide')
                 ;
@@ -555,7 +555,168 @@ userControllers
     }]);
 
 userControllers
-    .controller('userControllers.userPaperCtrl', ['$scope', function($scope)  {
+    .controller('userControllers.userPaperCtrl', ['$scope', '$state', function($scope, $state)  {
+
+
+            //-------------------初始化---------------------------------//
+            $scope.title = "我的病历";
+            $scope.back = function(){
+                $state.go('homepage');
+            }
+            drawBar();
+            //--------------------------------------------------------//
+
+
+            function drawBar() {
+                //echarts路径配置
+                require.config({
+                    paths: {
+                        echarts: 'app/bower_components/echarts-2.2.1/build/dist'
+                    }
+                });
+
+                require(
+                    [
+                        'echarts',
+                        'echarts/chart/bar', // 使用柱状图就加载bar模块，按需加载
+                        'echarts/chart/line' // 使用折线图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('userPaperEcharts_bar')); 
+
+                        //获取画图所需option
+                        var option = getLineOption();
+                
+                        var ecConfig = require('echarts/config');
+                        function eConsole(param) {
+                            paperHandler(param.name);
+                        }
+                        myChart.on(ecConfig.EVENT.CLICK, eConsole);
+                    
+                        // 为echarts对象加载数据 
+                        myChart.setOption(option);
+                    }
+                );
+            }
+
+            function getLineOption() {
+                    
+                option = {
+                    //图表与容器间距离
+                    grid: {
+                        x:  80,
+                        y:  30,
+                        x2: 30,
+                        y2: 60,
+                        borderWidth: 0
+                    },
+                    legend : {
+                        data : ['电子病历']
+                    },
+                    xAxis : [
+                        {
+                            type : 'time',
+                            boundaryGap : [0.1,0.1],
+                            splitNumber: 5
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'category',
+                            data : ["开发区医院", "开发区\n第二医院", "开发区\n第三医院"]
+                        }
+                    ],
+                    series : [
+                        {
+                            name: '电子病历',
+                            type: 'line',
+                            showAllSymbol: true,
+                            symbolSize: 13,
+                            data:
+                                [
+                                    new Date("2015-03-02"),
+                                    new Date("2015-05-04"),
+                                    new Date("2015-11-04"),
+                                ],
+                        }
+                    ]
+                };
+
+                return option;
+            }
+
+            function paperHandler(hospital) {
+                hospital = hospital.split('\n').join("");
+                
+                switch(hospital) {
+                    case "开发区医院":
+                        $state.go('userPaperDetail', {index: 1});
+                        break;
+                    case "开发区第二医院":
+                        $state.go('userPaperDetail', {index: 2});
+                        break;
+                    case "开发区第三医院":
+                        $state.go('userPaperDetail', {index: 3});
+                        break;
+                    default:
+                        alert("switch hospital wrong!");
+                }
+            }
+    }]);
+
+
+userControllers
+    .controller('userControllers.userPaperDetailCtrl', ['$scope', '$state', function($scope, $state)  {
+
+
+            //-------------------初始化---------------------------------//
+            $scope.title = "病人资料";
+            $scope.back = function(){
+                $state.go('userPaper');
+            }
+            $scope.index = $state.params.index;
+            //--------------------------------------------------------//
+
+            var paper1 = {
+                    hospital: "开发区医院",
+                    paperID:  "GDAA00011432699390",
+                    doctorID: "GDAA00011",
+                    doctor:   "张晓明",
+                    room:     "内科",
+                    date:     "2015-03-02 12:03:10",
+                },
+                paper2 = {
+                    hospital: "开发区第二医院",
+                    paperID:  "GDAA00011432699391",
+                    doctorID: "BPDD34556",
+                    doctor:   "黄衡水",
+                    room:     "外科",
+                    date:     "2015-05-04 16:43:34",
+                },
+                paper3 = {
+                    hospital: "开发区第三医院",
+                    paperID:  "GDAA00011432699392",
+                    doctorID: "YDFE88767",
+                    doctor:   "外科",
+                    room:     "王神萌",
+                    date:     "2015-11-04 09:52:42",
+                };
+
+            switch($scope.index) {
+                case "1":
+                    $scope.userPaper = paper1;
+                    break;
+                case "2":
+                    $scope.userPaper = paper2;
+                    break;
+                case "3":
+                    $scope.userPaper = paper3;
+                    break;
+                default:
+                    $scope.userPaper = "";
+                    alert("switch index wrong!");
+            }
 
     }]);
 
