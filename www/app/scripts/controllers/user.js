@@ -22,6 +22,8 @@ userControllers
                 $state.go('homepage');
             }
 
+            $scope.asurancesNum = localStorage.asurancesLength ? localStorage.asurancesLength : 2;
+
             //----------------初始化用户信息-------------------------------
             $scope.initInfo = function() {
                 $.ajax(baseUrl+"/patient"+"/userInfo",{
