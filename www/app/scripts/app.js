@@ -345,6 +345,18 @@ angular.module('starter', ['ionic', 'controllers', 'userServices', 'ngCookies'])
       templateUrl: viewsRoot + 'healthEva.html',
       controller: 'healthEvaControllers.healthEvaCtrl',
     })
+    
+    .state('newHealthManage', {
+      url:'/newHealthManage',
+      templateUrl: viewsRoot + 'newHealthManage.html',
+      controller: 'healthManageControllers.newHealthManageCtrl',
+    })
+    
+    .state('userInsurance', {
+      url:'/userInsurance',
+      templateUrl: viewsRoot + 'userInsurance.html',
+      controller: 'userControllers.userInsuranceCtrl',
+    })
 
   $urlRouterProvider.otherwise('/');
 });

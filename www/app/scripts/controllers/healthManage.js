@@ -10,7 +10,7 @@ healthManageControllers
     .controller('healthManageControllers.healthManageCtrl', ['$scope', '$state', 'getBarOptions', function($scope, $state, getBarOptions)  {
 
         //-------------------------数据初始化--------------------------------------------
-        $scope.title = "健康管理";
+        $scope.title = "健康监测";
         $scope.members = [];
         $scope.beginTime = "";
         $scope.endTime = "";
@@ -271,7 +271,7 @@ healthManageControllers
             
                     // 为echarts对象加载数据 
                     myChart.setOption(options.option); 
-console.log($scope.members[$scope.currentPerson].bloodPressure)
+
                     //设置时间
                     $scope.beginTime = rootTime(options.beginTime);
                     $scope.endTime   = rootTime(options.endTime);
@@ -822,4 +822,14 @@ healthManageControllers
             }
         }
 
+    }]);
+
+healthManageControllers
+    .controller('healthManageControllers.newHealthManageCtrl', ['$scope', '$state', function($scope, $state) {
+        //-------------------------数据初始化--------------------------------------------
+        $scope.title = "健康管理";
+
+        $scope.back = function() {
+            $state.go("homepage");
+        }
     }]);

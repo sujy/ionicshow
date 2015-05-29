@@ -83,7 +83,8 @@
 }
 
 .userG span {
-    width: 2em;
+    width: 4em;
+    text-align: right;
     color: #565656;
 }
 
@@ -278,3 +279,14 @@ div#userPaperBody section#echarts_section {
     -webkit-box-shadow: 3px 3px 3px;
     box-shadow: 0px 6px 30px -7px;
 }
+
+div.ui.add_asurance.modal, div.ui.asuranceDetail.modal {
+    padding: 10px;
+    min-height: 292px;
+    box-sizing: border-box;
+}
+
+div.ui.asuranceDetail.modal {
+    min-height: 240px;
+}
+

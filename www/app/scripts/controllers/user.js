@@ -22,6 +22,8 @@ userControllers
                 $state.go('homepage');
             }
 
+            $scope.asurancesNum = localStorage.asurancesLength ? localStorage.asurancesLength : 2;
+
             //----------------初始化用户信息-------------------------------
             $scope.initInfo = function() {
                 $.ajax(baseUrl+"/patient"+"/userInfo",{
@@ -779,3 +781,129 @@ userControllers
         };
 
     }]);
+
+userControllers
+    .controller('userControllers.userInsuranceCtrl', ['$scope', '$state', function($scope, $state)  {
+
+        //------------------初始化数据----------------------------------
+        $scope.title = "我的保险";
+        $scope.listCanSwipe = true;
+        $scope.items = [];
+
+        if (!localStorage.asurancesLength || localStorage.asurancesLength == 0) {
+            localStorage.asurancesLength  = 2;
+            localStorage.asurancesMoney   = "3000^^2000";
+            localStorage.asurancesStyle   = "医疗保险^^商业保险";
+            localStorage.asurancesCompany = "太平洋保险^^平安保险";
+            localStorage.asurancesId      = "61234586634023^^45634896641211";
+        }
+
+        dispose();
+
+        $scope.back = function(){
+            $state.go('homepage');
+        }
+          
+        //-------------------------------------------------------------
+
+        $scope.delete = function(index) {
+            if (localStorage.asurancesLength == 1) {
+                localStorage.asurancesLength = 0;
+                localStorage.removeItem("asurancesMoney");
+                localStorage.removeItem("asurancesStyle");
+                localStorage.removeItem("asurancesCompany");
+                localStorage.removeItem("asurancesId");
+            } else {
+
+                var len = localStorage.asurancesLength;
+
+                var moneys   = localStorage.asurancesMoney.split("^^");
+                var styles   = localStorage.asurancesStyle.split("^^");
+                var companys = localStorage.asurancesCompany.split("^^");
+                var ids      = localStorage.asurancesId.split("^^");
+
+                moneys.splice(index, 1);
+                styles.splice(index, 1);
+                companys.splice(index, 1);
+                ids.splice(index, 1);
+
+                localStorage.asurancesMoney = moneys.join("^^");
+                localStorage.asurancesStyle = styles.join("^^");
+                localStorage.asurancesCompany = companys.join("^^");
+                localStorage.asurancesId = ids.join("^^");
+
+                --localStorage.asurancesLength;
+
+            }
+
+            $scope.items.splice(index, 1);
+        };
+
+        $scope.showAdd = function() {
+            $(".ui.add_asurance.modal").modal("show");
+        }
+          
+        $scope.add = function() {
+            var temp = {};
+
+            temp.money   = $scope._money;
+            temp.style   = $scope._style;
+            temp.company = $scope._company;
+            temp.id      = $scope._id;
+
+            if (!temp.money) {
+                alert("请输入余额");
+                return;
+            } else if (!temp.style) {
+                alert("请输入保险性质");
+                return;
+            } else if (!temp.company) {
+                alert("请输入保险机构");
+                return;
+            } else if (!temp.id) {
+                alert("请输入保险单号");
+                return;
+            }
+
+            if (++localStorage.asurancesLength == 1) {
+                localStorage.asurancesMoney   = temp.money;
+                localStorage.asurancesStyle   = temp.style;
+                localStorage.asurancesCompany = temp.company;
+                localStorage.asurancesId      = temp.id;
+            } else {
+                localStorage.asurancesMoney   += "^^" + temp.money;
+                localStorage.asurancesStyle   += "^^" + temp.style;
+                localStorage.asurancesCompany += "^^" + temp.company;
+                localStorage.asurancesId      += "^^" + temp.id;
+            }
+
+            alert("添加成功！");
+            $(".ui.add_asurance.modal").modal("hide");
+            $scope.items.push(temp);
+        }
+
+        function dispose() {
+            var len = localStorage.asurancesLength;
+
+            var moneys   = localStorage.asurancesMoney.split("^^");
+            var styles   = localStorage.asurancesStyle.split("^^");
+            var companys = localStorage.asurancesCompany.split("^^");
+            var ids      = localStorage.asurancesId.split("^^");
+
+            for (var i = 0; i < len; i++) {
+                var tmp = {};
+                tmp.money = moneys[i];
+                tmp.style = styles[i];
+                tmp.company = companys[i];
+                tmp.id = ids[i];
+                $scope.items.push(tmp);
+            }
+        };
+
+        $scope.showAsuranceDetail = function(index) {
+            $scope.keynote = $scope.items[index];
+            $(".ui.asuranceDetail.modal").modal("show");
+        }
+
+    }]);
+
