@@ -44,6 +44,10 @@ html, body {
     width: 90% !important;
 }
 
+.marginTop0px {
+    margin-top: 0px !important;
+}
+
 .marginTop20px {
     margin-top: 20px !important;
 }
